@@ -1,5 +1,6 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "6.1.0"
+    id "maven-publish"
 }
 
 apply plugin: 'java'
@@ -43,4 +44,12 @@ signing {
 
 test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        mavenLibrary(MavenPublication) {
+            from components.java
+        }
+    }
 }
