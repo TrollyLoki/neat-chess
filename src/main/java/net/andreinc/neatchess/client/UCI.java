@@ -61,14 +61,14 @@ public class UCI {
         start(LC0);
     }
 
-    public void start(String cmd) {
+    public UCIResponse<EngineInfo> start(String cmd) {
         var pb = new ProcessBuilder(cmd);
         try {
             this.process = pb.start();
             this.reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             this.writer = new OutputStreamWriter(process.getOutputStream());
             // An UCI command needs to be sent to initialize the engine
-            getEngineInfo();
+            return getEngineInfo();
         } catch (IOException e) {
             throw new UCIRuntimeException(e);
         }
